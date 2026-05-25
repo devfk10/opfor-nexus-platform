@@ -1,0 +1,616 @@
+<!-- =========================
+IMAGE FOLDER STRUCTURE
+========================= -->
+
+<!--
+project-folder/
+│
+├── index.html
+├── images/
+│   ├── hero.jpg
+│   ├── nightvision.jpg
+│   ├── urban.jpg
+│   └── field.jpg
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OPFOR Nexus | Tactical Airsoft</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#0A0C0E;
+      color:#E5E7E9;
+      font-family:'Inter',sans-serif;
+      overflow-x:hidden;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    h1,h2,h3,
+    .mono,
+    nav a,
+    button{
+      font-family:'JetBrains Mono',monospace;
+    }
+
+    .container{
+      max-width:1280px;
+      margin:auto;
+      padding:0 1.5rem;
+    }
+
+    h2{
+      font-size:1.8rem;
+      border-left:4px solid #C5A059;
+      padding-left:1rem;
+      margin:3rem 0 1.5rem;
+    }
+
+    /* =========================
+    NAVBAR
+    ========================= */
+
+    .navbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1rem 1.5rem;
+      background:rgba(10,12,14,0.96);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid #2A2F35;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+
+    .logo{
+      font-size:1.5rem;
+      font-weight:700;
+      letter-spacing:1px;
+    }
+
+    .logo span{
+      color:#C5A059;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:0.8rem;
+      list-style:none;
+      align-items:center;
+    }
+
+    .nav-links a{
+      position:relative;
+      color:#E5E7E9;
+      text-decoration:none;
+      font-size:0.78rem;
+      padding:0.4rem 0;
+      border-bottom:2px solid transparent;
+      transition:all .25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:#C5A059;
+      border-bottom-color:#C5A059;
+    }
+
+    .nav-links a.active::after{
+      content:"⌃";
+      position:absolute;
+      bottom:-14px;
+      left:50%;
+      transform:translateX(-50%) rotate(180deg);
+      font-size:12px;
+      color:#C5A059;
+    }
+
+    .menu-btn{
+      display:none;
+      background:none;
+      border:1px solid #C5A059;
+      color:#C5A059;
+      padding:0.45rem 0.9rem;
+      cursor:pointer;
+      transition:.25s;
+    }
+
+    .menu-btn:hover{
+      background:#C5A059;
+      color:#0A0C0E;
+    }
+
+    .mobile-nav{
+      display:none;
+      flex-direction:column;
+      background:#0A0C0E;
+      border-top:1px solid #2A2F35;
+      position:absolute;
+      top:70px;
+      left:0;
+      width:100%;
+      z-index:999;
+    }
+
+    .mobile-nav a{
+      padding:1rem;
+      color:#E5E7E9;
+      text-decoration:none;
+      border-bottom:1px solid #2A2F35;
+    }
+
+    .mobile-nav.show{
+      display:flex;
+    }
+
+    /* =========================
+    HERO SECTION
+    ========================= */
+
+    .hero{
+      min-height:90vh;
+      display:flex;
+      align-items:center;
+      padding:4rem 1.5rem;
+
+      /* =========================
+      HERO IMAGE HERE
+      ========================= */
+
+      background:
+      linear-gradient(
+      0deg,
+      rgba(10,12,14,0.92),
+      rgba(10,12,14,0.55)
+      ),
+      url('images/image1.jpg');
+
+      background-size:cover;
+      background-position:center;
+    }
+
+    .hero-content{
+      max-width:700px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.5rem,6vw,4.8rem);
+      line-height:1.1;
+      margin-bottom:1rem;
+    }
+
+    .hero h1 span{
+      color:#C5A059;
+    }
+
+    .hero p{
+      font-size:1.1rem;
+      color:#C8CDD1;
+      margin-bottom:2rem;
+      line-height:1.7;
+      max-width:600px;
+    }
+
+    .btn-primary{
+      display:inline-block;
+      background:transparent;
+      border:1px solid #C5A059;
+      color:#C5A059;
+      padding:0.9rem 2rem;
+      text-decoration:none;
+      transition:.25s ease;
+      margin-right:1rem;
+    }
+
+    .btn-primary:hover{
+      background:#C5A059;
+      color:#0A0C0E;
+    }
+
+    .btn-secondary{
+      color:#E5E7E9;
+      text-decoration:underline;
+      transition:.25s;
+    }
+
+    .btn-secondary:hover{
+      color:#C5A059;
+    }
+
+    /* =========================
+    CARDS
+    ========================= */
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:1.5rem;
+      margin-bottom:2rem;
+    }
+
+    .card{
+      background:#1A1F24;
+      padding:1.3rem;
+      border-top:2px solid #C5A059;
+      transition:all .25s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+      border-color:#d6b56d;
+    }
+
+    .badge{
+      border:1px solid #C5A059;
+      color:#C5A059;
+      font-size:0.7rem;
+      display:inline-block;
+      padding:0.2rem 0.6rem;
+      margin-bottom:0.8rem;
+    }
+
+    .card h3{
+      margin-bottom:0.8rem;
+      font-size:1.1rem;
+    }
+
+    .card p{
+      color:#B2B8BE;
+      line-height:1.6;
+      font-size:0.95rem;
+    }
+
+    .card a{
+      color:#C5A059;
+      text-decoration:none;
+    }
+
+    /* =========================
+    GALLERY IMAGE
+    ========================= */
+
+    .gallery-img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      margin-bottom:1rem;
+      border:1px solid #2A2F35;
+    }
+
+    /* =========================
+    PRICING
+    ========================= */
+
+    .pricing-grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:2rem;
+      background:#1A1F24;
+      padding:2rem;
+      margin:2rem 0;
+    }
+
+    .price-col{
+      flex:1;
+      min-width:260px;
+    }
+
+    .price-col h3{
+      margin-bottom:1rem;
+    }
+
+    .price-col p{
+      line-height:1.8;
+      color:#B7BDC2;
+    }
+
+    /* =========================
+    FOOTER
+    ========================= */
+
+    .radio-footer{
+      background:#0C0F12;
+      border-top:1px solid #2A2F35;
+      padding:2rem 1.5rem 1.5rem;
+      margin-top:4rem;
+    }
+
+    .comms-line{
+      text-align:center;
+      font-size:0.75rem;
+      color:#6A7A6E;
+      border-bottom:1px dashed #2A2F35;
+      padding-bottom:1rem;
+      margin-bottom:1.5rem;
+      font-family:monospace;
+    }
+
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:2rem;
+      margin-bottom:2rem;
+    }
+
+    .footer-col h4{
+      margin-bottom:0.8rem;
+    }
+
+    .footer-col a{
+      display:block;
+      color:#9AA2AA;
+      text-decoration:none;
+      margin-top:0.5rem;
+      font-size:0.85rem;
+    }
+
+    .footer-col a:hover{
+      color:#C5A059;
+    }
+
+    .copyright{
+      text-align:center;
+      font-size:0.75rem;
+      border-top:1px solid #2A2F35;
+      padding-top:1.5rem;
+      color:#7F878E;
+    }
+
+    /* =========================
+    MOBILE
+    ========================= */
+
+    @media(max-width:768px){
+
+      .nav-links{
+        display:none;
+      }
+
+      .menu-btn{
+        display:block;
+      }
+
+      .hero{
+        min-height:75vh;
+      }
+
+      .hero h1{
+        font-size:2.5rem;
+      }
+
+      .hero p{
+        font-size:1rem;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+  NAVBAR
+  ========================= -->
+
+  <div class="navbar">
+
+    <div class="logo">
+      OPFOR<span>NEXUS</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Fields</a></li>
+      <li><a href="#">Marketplace</a></li>
+      <li><a href="#">Teams</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a href="#">Guides</a></li>
+      <li><a href="#">Community</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+
+    <button class="menu-btn" id="menuToggle">
+      MENU
+    </button>
+
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#">Home</a>
+    <a href="#">Events</a>
+    <a href="#">Fields</a>
+    <a href="#">Marketplace</a>
+    <a href="#">Teams</a>
+    <a href="#">Gallery</a>
+    <a href="#">Guides</a>
+    <a href="#">Community</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <!-- =========================
+  HERO
+  ========================= -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        YOUR <span>MISSION</span><br>
+        BEGINS HERE.
+      </h1>
+
+      <p>
+        Field intel. Unit movements. Tactical tradecraft.
+        No esports — just real airsoft operations.
+      </p>
+
+      <a href="#" class="btn-primary">
+        [ JOIN THE PATROL ]
+      </a>
+
+      <a href="#" class="btn-secondary">
+        VIEW OPERATIONS MAP
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+  CONTENT
+  ========================= -->
+
+  <div class="container">
+
+    <h2>MEDIA / GALLERY</h2>
+
+    <div class="grid-3">
+
+      <div class="card">
+
+        <div class="badge">NIGHT OPS</div>
+
+        <!-- IMAGE HERE -->
+        <img src="images/image2.jpg" class="gallery-img">
+
+        <p>Night raid operation</p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="badge">URBAN</div>
+
+        <!-- IMAGE HERE -->
+        <img src="images/image3.jpg" class="gallery-img">
+
+        <p>Downtown CQB mission</p>
+
+      </div>
+
+      <div class="card">
+
+        <div class="badge">FIELD DAY</div>
+
+        <!-- IMAGE HERE -->
+        <img src="images/image4.jpg" class="gallery-img">
+
+        <p>Weekend woodland skirmish</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- PROJECT DEVELOPMENT SECTION (যোগ করুন) -->
+<div class="container">
+  <h2>PROJECT DEVELOPMENT</h2>
+  <div class="pricing-grid">
+    <div class="price-col">
+      <h3>ESTIMATED COST</h3>
+      <p><strong>Frontend</strong> $4,500 – $6,500<br>
+      <strong>Backend</strong> $5,000 – $7,500<br>
+      <strong>Admin Dashboard</strong> $2,500 – $3,500<br>
+      <span style="border-top:1px solid #C5A059; display:inline-block; margin-top:0.5rem; padding-top:0.5rem;">TOTAL: $12,000 – $17,500</span></p>
+    </div>
+    <div class="price-col">
+      <h3>TIMELINE (14 WEEKS)</h3>
+      <p>Week 1-2: Design & Architecture<br>
+      Week 3-5: Frontend Development<br>
+      Week 6-9: Backend Development<br>
+      Week 10-11: Marketplace & Events<br>
+      Week 12-13: Teams & Community<br>
+      Week 14: Testing & Deployment</p>
+    </div>
+  </div>
+</div>
+
+  <!-- =========================
+  FOOTER
+  ========================= -->
+
+  <footer class="radio-footer">
+
+    <div class="comms-line">
+      > CONNECTION: SECURE // NODE: OPFOR_NEXUS
+    </div>
+
+    <div class="footer-links container">
+
+      <div class="footer-col">
+        <h4>PLATFORM</h4>
+        <a href="#">Events</a>
+        <a href="#">Marketplace</a>
+        <a href="#">Teams</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>COMMUNITY</h4>
+        <a href="#">Guides</a>
+        <a href="#">Forums</a>
+        <a href="#">Discord</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>COMPANY</h4>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 OPFOR Nexus. All rights reserved.
+    </div>
+
+  </footer>
+
+  <!-- =========================
+  MOBILE MENU JS
+  ========================= -->
+
+  <script>
+
+    const menuToggle =
+    document.getElementById('menuToggle');
+
+    const mobileNav =
+    document.getElementById('mobileNav');
+
+    menuToggle.onclick = () => {
+      mobileNav.classList.toggle('show');
+    };
+
+  </script>
+
+</body>
+</html>
